@@ -20,7 +20,7 @@ class GreeterControllerTestConfig {
 
     @Bean
     BeginningProvider beginningProvider() {
-        List<TimeRangePredicateSupplier> predicates = Arrays.asList(new AfternoonPredicateSupplier(), new EveningPredicateSupplier(), new NightPredicateSupplier(), new MorningPredicateSupplier());
+        List<TimeBasedGreetingSupplier> predicates = Arrays.asList(new AfternoonGreetingSupplier(), new EveningGreetingSupplier(), new NightGreetingSupplier(), new MorningGreetingSupplier());
         return new BeginningProviderImpl(() -> LocalTime.parse("13:00"), predicates);
     }
 

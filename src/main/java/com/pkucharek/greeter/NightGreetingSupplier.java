@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalTime;
 
 @Service
-class NightPredicateSupplier implements TimeRangePredicateSupplier {
+class NightGreetingSupplier implements TimeBasedGreetingSupplier {
     @Override
     public boolean test(LocalTime time) {
         boolean isAfterEvening = time.isAfter(LocalTime.parse("22:00:00"));
