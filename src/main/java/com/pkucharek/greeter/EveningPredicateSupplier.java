@@ -1,7 +1,10 @@
 package com.pkucharek.greeter;
 
+import org.springframework.stereotype.Service;
+
 import java.time.LocalTime;
 
+@Service
 class EveningPredicateSupplier implements TimeRangePredicateSupplier {
     @Override
     public boolean test(LocalTime time) {

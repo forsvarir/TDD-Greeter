@@ -1,10 +1,11 @@
 package com.pkucharek.greeter;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.stereotype.Component;
 
+@Component
 public class Greeter {
     private final BeginningProvider beginningProvider;
-    private int counter = 0;
 
     public Greeter(BeginningProvider beginningProvider) {
         this.beginningProvider = beginningProvider;
@@ -21,8 +22,7 @@ public class Greeter {
     }
 
     private void print(String result) {
-        counter++;
-        System.out.printf("%d. %s%n", counter, result);
+        System.out.println(result);
     }
 
     private String getCorrectedName(String name) {

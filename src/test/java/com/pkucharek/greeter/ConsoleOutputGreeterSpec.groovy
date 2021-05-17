@@ -19,14 +19,14 @@ class ConsoleOutputGreeterSpec extends Specification {
         when:
             standardGreeter.greet("John")
         then:
-            printedMessageIs("1. Hello John\r\n")
+            printedMessageIs("Hello John\r\n")
 
         when:
             standardGreeter.greet("John")
         then:
             printedMessageIs(
-                "1. Hello John\r\n" +
-                "2. Hello John\r\n"
+                    "Hello John\r\n" +
+                            "Hello John\r\n"
             )
     }
 

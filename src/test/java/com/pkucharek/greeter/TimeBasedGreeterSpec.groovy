@@ -54,7 +54,8 @@ class TimeBasedGreeterSpec extends Specification {
 
     def timeBasedGreeter(String time) {
         def timeProvider = () -> LocalTime.parse(time)
-        def beginningProviderImpl = new BeginningProviderImpl(timeProvider)
+        def predicates = Arrays.asList(new AfternoonPredicateSupplier(), new MorningPredicateSupplier(), new EveningPredicateSupplier(), new NightPredicateSupplier())
+        def beginningProviderImpl = new BeginningProviderImpl(timeProvider, predicates)
         new Greeter(beginningProviderImpl)
     }
 

@@ -1,31 +1,23 @@
 package com.pkucharek.greeter;
 
+import org.springframework.stereotype.Component;
+
 import java.time.LocalTime;
 import java.util.List;
 
+@Component
 class BeginningProviderImpl implements BeginningProvider {
     private final TimeProvider timeProvider;
-    private final List<TimeRangePredicateSupplier> timeRanges = List.of(
-        new MorningPredicateSupplier(),
-        new EveningPredicateSupplier(),
-        new NightPredicateSupplier()
-    );
+    private final List<TimeRangePredicateSupplier> timeRanges;
 
-    BeginningProviderImpl() {
-        timeProvider = LocalTime::now;
-    }
-
-    BeginningProviderImpl(TimeProvider timeProvider) {
+    BeginningProviderImpl(TimeProvider timeProvider, List<TimeRangePredicateSupplier> predicates) {
         this.timeProvider = timeProvider;
+        this.timeRanges = predicates;
     }
 
     @Override
     public String provide() {
         LocalTime time = timeProvider.provide();
-        for (TimeRangePredicateSupplier predicateSupplier : timeRanges)
-            if (predicateSupplier.test(time))
-                return predicateSupplier.get();
-
-        return new AfternoonPredicateSupplier().get();
+        return timeRanges.stream().filter(p -> p.test(time)).findFirst().map(TimeRangePredicateSupplier::get).orElseThrow(() -> new RuntimeException("Invalid time"));
     }
 }

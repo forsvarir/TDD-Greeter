@@ -1,11 +1,15 @@
 package com.pkucharek.greeter;
 
+import org.springframework.stereotype.Service;
+
 import java.time.LocalTime;
 
+@Service
 class AfternoonPredicateSupplier implements TimeRangePredicateSupplier {
     @Override
     public boolean test(LocalTime time) {
-        throw new AfternoonCheckException("Afternoon is default case, shouldn't be checked");
+        return time.isAfter(LocalTime.parse("12:00:00"))
+                && time.isBefore(LocalTime.parse("18:00:01"));
     }
 
     @Override
